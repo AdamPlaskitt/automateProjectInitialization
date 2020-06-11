@@ -18,30 +18,33 @@ while len(list_all_args) > 0:
     elif command.lower() == "-p":
         private = True
 
+commands = None
+local = None
+
 if remote:
     github = Github(github_token)
     user = github.get_user()
     login = user.login
     repo = user.create_repo(project_name, private=private)
 
-    commands_remote = [f'echo # {repo.name} >> README.md',
-                       f'git remote add origin https://github.com/{login}/{project_name}.git',
-                       'git add .',
-                       'git commit -m "Initial commit"',
-                       'git push -u origin master']
+    commands = [f'echo # {repo.name} >> README.md',
+                f'git remote add origin https://github.com/{login}/{project_name}.git',
+                'git add .',
+                'git commit -m "Initial commit"',
+                'git push -u origin master']
 
-    for c in commands_remote:
-        os.system(c)
-
-    print(f"Successfully initiated remote project {project_name}")
+    location = "remote"
 
 elif not remote:
 
-    commands_local = [f'echo # {project_name} >> README.md',
-                      'git add .',
-                      'git commit -m "Initial commit"']
+    commands = [f'echo # {project_name} >> README.md',
+                'git add .',
+                'git commit -m "Initial commit"']
 
-    for c in commands_local:
-        os.system(c)
+    location = "local"
 
-    print(f"Successfully initiated local project {project_name}")
+
+for c in commands:
+    os.system(c)
+
+print(f"Successfully initiated {local} project {project_name}")
