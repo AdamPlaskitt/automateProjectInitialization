@@ -14,6 +14,4 @@ git init
 
 python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %GithubToken% %*
 
-code .
-
 :EOF

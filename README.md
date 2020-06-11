@@ -13,3 +13,4 @@ is only possible with a remote initiation.
 the repo and README
 * ```-DO <description> -do <description>``` specifies the description to add 
 to the repo only
+* ```-e <editor>``` specifies the editor to open the project in

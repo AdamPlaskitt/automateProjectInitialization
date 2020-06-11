@@ -5,8 +5,9 @@ from github import Github
 # Command parameters
 remote = True
 private = False
-description = "."
+description = ""
 description_only = False
+editor = "code"
 
 # Passed arguments
 github_token = str(sys.argv[1])
@@ -27,6 +28,8 @@ while len(list_all_args) > 0:
     elif command.lower() == "-do" and len(list_all_args) > 0:
         description = list_all_args.pop(0)
         description_only = True
+    elif command.lower() == "-e" and len(list_all_args) > 0:
+        editor = list_all_args.pop(0)
 
 commands = None
 location = None
@@ -56,8 +59,11 @@ elif not remote:
     location = "local"
 
 # Add description to readme
-if description != "." and not description_only:
+if description != "" and not description_only:
     commands.insert(1, f'echo {description}>> README.md')
+
+# Adds the command to open the editor
+commands.append(f'{editor} .')
 
 # Executes commands
 for c in commands:
