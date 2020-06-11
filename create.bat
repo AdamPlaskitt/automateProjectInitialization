@@ -5,13 +5,9 @@ if "%1"=="" (
     goto EOF
 )
 
-set filename=%1
-
-mkdir "\Users\Adam\projects\myProjects\%filename%" || ( echo Project name already in use & goto EOF )
-
-cd \Users\Adam\projects\myProjects\%filename%
-git init
-
-python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %GithubToken% %*
+FOR /F "tokens=* USEBACKQ" %%F IN (`python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %GithubToken% %*`) DO (
+SET VAR=%%F
+)
+cd %VAR%
 
 :EOF
