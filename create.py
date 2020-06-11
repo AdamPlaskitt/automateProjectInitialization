@@ -2,18 +2,19 @@ import os
 import sys
 from github import Github
 
-project_name = str(sys.argv[1])
-github_token = str(sys.argv[2])
-flag = str(sys.argv[3]).lower()
+github_token = str(sys.argv[1])
+project_name = str(sys.argv[2])
+list_all_args = sys.argv[3:]
+if len(list_all_args) == 0:
+    list_all_args.append("-r")
 
-if flag == "-r":
+if list_all_args[0].lower() == "-r":
     github = Github(github_token)
     user = github.get_user()
     login = user.login
     repo = user.create_repo(project_name)
 
-    commands_remote = [f'echo "# {repo.name}" >> README.md',
-                       'git init',
+    commands_remote = [f'echo # {repo.name} >> README.md',
                        f'git remote add origin https://github.com/{login}/{project_name}.git',
                        'git add .',
                        'git commit -m "Initial commit"',
@@ -24,9 +25,9 @@ if flag == "-r":
 
     print(f"Successfully initiated remote project {project_name}")
 
-elif flag == "-l":
+elif list_all_args[0].lower() == "-l":
+
     commands_local = [f'echo # {project_name} >> README.md',
-                      'git init',
                       'git add .',
                       'git commit -m "Initial commit"']
 

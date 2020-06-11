@@ -1,3 +1,4 @@
+@echo off
 
 if "%1"=="" (
     echo no project name provided
@@ -5,14 +6,13 @@ if "%1"=="" (
 )
 
 set filename=%1
-set flags=%2
 
 mkdir "\Users\Adam\projects\myProjects\%filename%" || ( echo Project name already in use & goto EOF )
 
 cd \Users\Adam\projects\myProjects\%filename%
 git init
 
-python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %filename% %GithubToken% %flags%
+python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %GithubToken% %*
 
 code .
 
