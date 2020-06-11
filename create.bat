@@ -12,8 +12,7 @@ mkdir "\Users\Adam\projects\myProjects\%filename%" || ( echo Project name alread
 cd \Users\Adam\projects\myProjects\%filename%
 git init
 
-
-python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %filename% %GithubToken%
+python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %filename% %GithubToken% %flags%
 
 code .
 
