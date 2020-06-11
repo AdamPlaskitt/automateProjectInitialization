@@ -21,6 +21,11 @@ to the repo only
 * ```-cd <path>``` Overrides the default path with the provided path
 
 ---
+## Setup
+Add path of 'automateProjectInitialization` to PATH and the env variables of GithubToken and
+DefaultProjectPath with there respective values.
+
+---
 #### .gitignore compatibility
 * Clion
 * Intellij

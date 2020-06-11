@@ -17,7 +17,7 @@ GOTO START_LOOP
 
 :END_LOOP
 
-FOR /F "tokens=* USEBACKQ" %%F IN (`python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %GithubToken% %*`) DO (
+FOR /F "tokens=* USEBACKQ" %%F IN (`python \Users\Adam\projects\myProjects\automateProjectInitialization\create.py %GithubToken% %DefaultProjectPath% %*`) DO (
 SET VAR=%%F
 )
 IF "%VAR%"=="A project with that name already exists" ( ECHO %VAR% ) else ( CD %VAR% )

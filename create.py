@@ -3,7 +3,6 @@ import sys
 from github import Github
 
 # Command parameters
-path_to_projects_default = "\\Users\\Adam\\projects\\myProjects"
 remote = True
 private = False
 description = ""
@@ -14,8 +13,9 @@ project_path_full = None
 
 # Passed arguments
 github_token = str(sys.argv[1])
-project_name = str(sys.argv[2])
-list_all_args = sys.argv[3:]
+path_to_projects_default = str(os.path.normpath(sys.argv[2]))
+project_name = str(sys.argv[3])
+list_all_args = sys.argv[4:]
 
 # Parse commands
 while len(list_all_args) > 0:
