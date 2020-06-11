@@ -9,3 +9,7 @@ with github remote repo under the same name.
 * ```-L -l``` specifies initiating a local repo
 * ```-P -p``` specifies the creation of a private repo --Note: a private repo
 is only possible with a remote initiation.
+* ```-D <description> -d <description>``` specifies the description to add to
+the repo and README
+* ```-DO <description> -do <description>``` specifies the description to add 
+to the repo only
