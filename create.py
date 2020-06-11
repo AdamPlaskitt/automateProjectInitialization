@@ -3,11 +3,14 @@ import sys
 from github import Github
 
 # Command parameters
+path_to_projects_default = "\\Users\\Adam\\projects\\myProjects"
 remote = True
 private = False
 description = ""
 description_only = False
 editor = "code"
+project_path = None
+project_path_full = None
 
 # Passed arguments
 github_token = str(sys.argv[1])
@@ -30,9 +33,23 @@ while len(list_all_args) > 0:
         description_only = True
     elif command.lower() == "-e" and len(list_all_args) > 0:
         editor = list_all_args.pop(0)
+    elif command.lower() == "-cd" and len(list_all_args) > 0:
+        project_path = list_all_args.pop(0)
 
 commands = None
 location = None
+
+# Set project paths and create local substructure
+if project_path is None:
+    project_path = path_to_projects_default
+project_path_full = project_path + '\\' + project_name
+try:
+    os.mkdir(project_path_full)
+except FileExistsError:
+    print("A project with that name already exists")
+    sys.exit(0)
+os.chdir(project_path_full)
+os.system('git init')
 
 # Initialise remote repo
 if remote:
@@ -66,7 +83,7 @@ if description != "" and not description_only:
 commands.append(f'{editor} .')
 
 # Adds .gitignore
-editor_ignore = ""
+editor_ignore = "."
 if editor.lower() == "eclipse":
     editor_ignore = ".project"
 elif editor.lower() == "clion" or editor.lower() == "intellij":
@@ -74,10 +91,11 @@ elif editor.lower() == "clion" or editor.lower() == "intellij":
 elif editor.lower() == "pycharm":
     editor_ignore = ".idea"
     commands.insert(1, f'echo venv/>> .gitignore')
-commands.insert(1, f'echo {editor_ignore}>> .gitignore')
+commands.insert(1, f'echo{editor_ignore}>> .gitignore')
 
 # Executes commands
 for c in commands:
     os.system(c)
 
 print(f"Successfully initiated {location} project {project_name}")
+print(project_path_full)
