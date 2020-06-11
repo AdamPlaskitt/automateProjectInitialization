@@ -19,7 +19,7 @@ while len(list_all_args) > 0:
         private = True
 
 commands = None
-local = None
+location = None
 
 if remote:
     github = Github(github_token)
@@ -47,4 +47,4 @@ elif not remote:
 for c in commands:
     os.system(c)
 
-print(f"Successfully initiated {local} project {project_name}")
+print(f"Successfully initiated {location} project {project_name}")
