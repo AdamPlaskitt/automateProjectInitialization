@@ -65,6 +65,17 @@ if description != "" and not description_only:
 # Adds the command to open the editor
 commands.append(f'{editor} .')
 
+# Adds .gitignore
+editor_ignore = ""
+if editor.lower() == "eclipse":
+    editor_ignore = ".project"
+elif editor.lower() == "clion" or editor.lower() == "intellij":
+    editor_ignore = ".idea"
+elif editor.lower() == "pycharm":
+    editor_ignore = ".idea"
+    commands.insert(1, f'echo venv/>> .gitignore')
+commands.insert(1, f'echo {editor_ignore}>> .gitignore')
+
 # Executes commands
 for c in commands:
     os.system(c)
