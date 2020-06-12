@@ -1,6 +1,7 @@
 import os
 import sys
 from github import Github
+from github.GithubException import GithubException
 
 # Command parameters
 remote = True
@@ -56,7 +57,14 @@ if remote:
     github = Github(github_token)
     user = github.get_user()
     login = user.login
-    repo = user.create_repo(project_name, private=private, description=description)
+    try:
+        repo = user.create_repo(project_name, private=private, description=description)
+    except GithubException:
+        # Github repo already exists
+        os.chdir(path_to_projects_default)
+        os.system(f'rmdir {project_name} /s /q')
+        print("A project with that name already exists")
+        sys.exit(0)
 
     commands = [f'echo # {repo.name} >> README.md',
                 f'git remote add origin https://github.com/{login}/{project_name}.git',
@@ -97,5 +105,4 @@ commands.insert(1, f'echo{editor_ignore}>> .gitignore')
 for c in commands:
     os.system(c)
 
-print(f"Successfully initiated {location} project {project_name}")
 print(project_path_full)
