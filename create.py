@@ -90,9 +90,6 @@ elif not remote:
 if description != "" and not description_only:
     commands.insert(1, f'echo {description}>> README.md')
 
-# Adds the command to open the editor
-commands.append(f'{editor} .')
-
 # Adds .gitignore
 editor_ignore = "."
 if editor.lower() == "eclipse":
