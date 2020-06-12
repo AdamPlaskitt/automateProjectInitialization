@@ -36,6 +36,9 @@ while len(list_all_args) > 0:
         editor = list_all_args.pop(0)
     elif command.lower() == "-cd" and len(list_all_args) > 0:
         project_path = list_all_args.pop(0)
+    else:
+        print("Command parameters not recognised")
+        sys.exit(0)
 
 commands = None
 location = None
