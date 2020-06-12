@@ -20,6 +20,6 @@ GOTO START_LOOP
 FOR /F "tokens=* USEBACKQ" %%F IN (`create.py %GithubToken% %DefaultProjectPath% %*`) DO (
 SET VAR=%%F
 )
-IF "%VAR%"=="A project with that name already exists" ( ECHO %VAR% ) else ( CD %VAR% )
+IF "%VAR%"=="A project with that name already exists" ( ECHO %VAR% ) else ( ECHO Successfully initiated project %1 & CD %VAR% )
 
 :EOF
