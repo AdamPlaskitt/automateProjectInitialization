@@ -1,6 +1,6 @@
 @ECHO OFF
 
-IF %1=="" (
+IF "%~1"=="" (
     ECHO no project name provided
     GOTO EOF
 )
@@ -11,11 +11,11 @@ SET EDITOR=code
 :START_LOOP
 
 IF (%1)==() GOTO END_LOOP
-IF /I %1=="-h" (START https://github.com/AdamPlaskitt/automateProjectInitialization/blob/master/README.md & ECHO See webpage for help & GOTO EOF) ELSE (
-IF /I %1=="--help" START https://github.com/AdamPlaskitt/automateProjectInitialization/blob/master/README.md & ECHO See webpage for help & GOTO EOF
+IF /I "%~1"=="-h" (START https://github.com/AdamPlaskitt/automateProjectInitialization/blob/master/README.md & ECHO See webpage for help & GOTO EOF) ELSE (
+IF /I "%~1"=="--help" START https://github.com/AdamPlaskitt/automateProjectInitialization/blob/master/README.md & ECHO See webpage for help & GOTO EOF
 )
 
-IF /I %1=="-e" IF NOT (%2)==() ( SET EDITOR=%2 )
+IF /I "%~1"=="-e" IF NOT (%2)==() ( SET EDITOR=%2 )
 
 SHIFT
 GOTO START_LOOP
