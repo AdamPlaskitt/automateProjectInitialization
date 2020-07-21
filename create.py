@@ -79,8 +79,7 @@ if remote:
 
 # Initialise local repo
 elif not remote:
-
-    commands = [f'echo # {project_name}>> README.md',
+    commands = [f'echo # {project_name} >> README.md',
                 'git add .',
                 'git commit -m "Initial commit"']
 
@@ -88,21 +87,18 @@ elif not remote:
 
 # Add description to readme
 if description != "" and not description_only:
-    commands.insert(1, f'echo {description}>> README.md')
+    commands.insert(1, f'echo {description} >> README.md')
 
 # Adds .gitignore
-editor_ignore = "."
-if editor.lower() == "eclipse":
-    editor_ignore = ".project"
-elif editor.lower() == "clion" or editor.lower() == "intellij":
-    editor_ignore = ".idea"
-elif editor.lower() == "pycharm":
-    editor_ignore = ".idea"
-    commands.insert(1, f'echo venv/>> .gitignore')
-commands.insert(1, f'echo{editor_ignore}>> .gitignore')
+editor_ignore = [".project", ".idea", "venv/", ".vs", ".vscode"]
+for item in editor_ignore:
+    commands.insert(1, f'echo {item} >> .gitignore')
 
 # Executes commands
 for c in commands:
     os.system(c)
+
+for c in commands:
+    print(c)
 
 print(project_path_full)
